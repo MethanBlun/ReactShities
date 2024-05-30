@@ -1,3 +1,6 @@
+import './App.css';
+import React, { useState } from 'react';
+
 function App() {
   // Données statiques d'exemple
   const data = [
@@ -5,6 +8,9 @@ function App() {
     { id: 2, name: 'Jane Smith', email: 'jane@example.com' },
     { id: 3, name: 'Michael Johnson', email: 'michael@example.com' }
   ];
+
+  // État pour contrôler l'ouverture du drawer
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
@@ -16,9 +22,20 @@ function App() {
         </div>
 
         <div className="hidden lg:block mt-8">
-          <div className="bg-blue-100 p-6 rounded-lg shadow-lg">
-            <h2 className="text-2xl font-bold mb-4">Dashboard</h2>
-            <p className="text-gray-700">This dashboard is only visible on large screens (lg and above).</p>
+          <button
+            className="bg-blue-500 text-white px-4 py-2 rounded"
+            onClick={() => setIsDrawerOpen(!isDrawerOpen)}
+          >
+            Toggle Drawer
+          </button>
+
+          <div
+            className={`fixed top-0 left-0 h-full bg-blue-100 p-6 shadow-lg transform transition-transform ${
+              isDrawerOpen ? 'translate-x-0' : '-translate-x-full'
+            }`}
+          >
+            <h2 className="text-2xl font-bold mb-4">Drawer Menu</h2>
+            <p className="text-gray-700">This drawer is only visible on large screens (lg and above).</p>
             <div className="mt-4">
               {/* Tableau d'exemple pour afficher les données */}
               <table className="min-w-full bg-white">
