@@ -1,14 +1,13 @@
-import './App.css';
+import "./App.css";
+
 function App() {
 
-  // État pour contrôler l'ouverture du drawer
 
-
-  return (
-
-<h1 className=''> vide</h1>
-
-  );
+  const fruits = ['orange','banane','chewingum','pasteque']
+  const listItem = fruits.map(fruit =><li>{fruit}</li>)
+  return  <>{listItem}
+  hekk
+  </>;
 }
 
 export default App;
