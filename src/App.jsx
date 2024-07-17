@@ -1,16 +1,13 @@
 import "./App.css";
+import Todolist from "./todolist";
 
 function App() {
-
-  
-  const fruits = [{name:'orange'}
-    ,{name:'banane'}
-    ,{name:'chewingum'}
-    ,{name:'pasteque'}]
-  const listItem = fruits.map(fruit =><li key={fruit.name}>{fruit.name}</li>)
-  return  <>{listItem}
-  hekk
-  </>;
+ 
+  return (
+    <>
+<Todolist></Todolist>
+    </>
+  );
 }
 
 export default App;
