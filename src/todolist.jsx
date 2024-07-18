@@ -16,7 +16,7 @@ export default function Todolist() {
     if (task.trim()) {
       const newTask = { id: Date.now(), text: task, done: false };
       setTasks([...tasks, newTask]);
-      console.log("Added Task:", newTask); // Log the new task
+      console.log("Added Task:", newTask); 
       setTask("");
     } else {
       alert("Please enter a task!");
@@ -24,11 +24,14 @@ export default function Todolist() {
   }
 
   function handleDone(taskId) {
-    console.log("Task ID to be toggled:", taskId); // Log the task ID to be toggled
+    console.log("Task ID to be toggled:", taskId); 
     setTasks(tasks.map(task => {
-      console.log("Current Task:", task); // Log the current task
+      console.log("Current Task:", task);
       return task.id === taskId ? { ...task, done: !task.done } : task;
+      
     }));
+    console.log(taskId,'and',task.id)
+ 
   }
 
   function handleDelete(taskId) {
@@ -71,7 +74,7 @@ export default function Todolist() {
           <li
             key={task.id}
             className={`flex items-center justify-between mb-3 mt-3 p-3 h-12 rounded-lg border m-10 border-slate-300 bg-slate-600 hover:bg-slate-700 shadow-xl ${
-              task.done ? "bg-slate-200 text-slate-700" : ""
+              task.done ? "bg-red-600" : ""
             }`}
           >
             <span className="text-base text-slate-200 overflow-x-auto pl-8 font-medium">
@@ -81,6 +84,9 @@ export default function Todolist() {
               <button
                 onClick={() => handleDone(task.id)}
                 className="px-3 py-2 rounded-lg bg-green-400 hover:bg-green-700 text-white font-medium"
+                // className={`flex items-center justify-between mb-3 mt-3 p-3 h-12 rounded-lg border m-10 border-slate-300 hover:bg-slate-700 shadow-xl ${
+                //   task.done ? "bg-slate-200 text-slate-700 line-through" : "bg-slate-600"
+                // }`}
               >
                 {task.done ? "Undone" : "Done"}
               </button>
