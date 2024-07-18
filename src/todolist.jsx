@@ -73,20 +73,19 @@ export default function Todolist() {
         {tasks.map(task => (
           <li
             key={task.id}
-            className={`flex items-center justify-between mb-3 mt-3 p-3 h-12 rounded-lg border m-10 border-slate-300 bg-slate-600 hover:bg-slate-700 shadow-xl ${
-              task.done ? "bg-red-600" : ""
-            }`}
+            className="flex items-center justify-between mb-3 mt-3 p-3 h-12 rounded-lg border m-10 border-slate-300 bg-slate-600 hover:bg-slate-700 shadow-xl "
+             
           >
-            <span className="text-base text-slate-200 overflow-x-auto pl-8 font-medium">
+            <span className={`text-base text-slate-200 overflow-x-auto pl-8 font-medium  ${
+              task.done ? 'line-through' : ''
+            }`}>
               {task.text}
             </span>
             <div className="flex gap-2">
               <button
                 onClick={() => handleDone(task.id)}
                 className="px-3 py-2 rounded-lg bg-green-400 hover:bg-green-700 text-white font-medium"
-                // className={`flex items-center justify-between mb-3 mt-3 p-3 h-12 rounded-lg border m-10 border-slate-300 hover:bg-slate-700 shadow-xl ${
-                //   task.done ? "bg-slate-200 text-slate-700 line-through" : "bg-slate-600"
-                // }`}
+             
               >
                 {task.done ? "Undone" : "Done"}
               </button>
