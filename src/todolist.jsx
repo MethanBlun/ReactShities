@@ -5,14 +5,14 @@ import { useState } from "react";
 export default function Todolist() {
   const [task, setTask] = useState("");
   const [tasks, setTasks] = useState([]);
-  const [isDone, setIsDone] = useState({});
+  const [doneTaskList,setDoneTaskList] = useState([])
+ // const [isDone, setIsDone] = useState({});
 
-  // Fonction pour gérer le changement de l'entrée
+  // Fonction pour gérer le changement de l'entrée(utilsation direct de la destructuration)
   function handleInputChange({ target }) {
     setTask(target.value);
   }
 
-  // Fonction pour ajouter une tâche
   function handleAddTask(event) {
     event.preventDefault();
     if (task.trim()) {
@@ -23,11 +23,15 @@ export default function Todolist() {
     }
   }
 
-  // Fonction pour marquer une tâche comme terminée
   function handleDone(taskId) {
+    console.log(taskId)
+    console.log(task.id)
     setTasks(tasks.map(task => 
       task.id === taskId ? { ...task, done: !task.done } : task
     ));
+    if (taskId === task.id){
+      alert('la tache est termne')
+    }else(alert('nothing hpnd'))
   }
 
   // Fonction pour supprimer une tâche
@@ -70,11 +74,11 @@ export default function Todolist() {
         {tasks.map(task => (
           <li
             key={task.id}
-            className={`flex items-center justify-between mb-3 mt-3 p-3 h-12 rounded-lg border m-10 border-slate-300 hover:bg-slate-600 shadow-xl ${
+            className={`flex items-center justify-between mb-3 mt-3 p-3 h-12 rounded-lg border m-10 border-slate-300 bg-slate-600 hover:bg-slate-700 shadow-xl ${
               task.done ? "bg-slate-200 text-slate-700" : ""
             }`}
           >
-            <span className="text-base text-slate-200 overflow-y-auto pl-8 font-medium">
+            <span className="text-base text-slate-200 overflow-x-auto pl-8 font-medium">
               {task.text}
             </span>
             <div className="flex gap-2">
@@ -97,31 +101,6 @@ export default function Todolist() {
     </div>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
