@@ -5,10 +5,8 @@ import { useState } from "react";
 export default function Todolist() {
   const [task, setTask] = useState("");
   const [tasks, setTasks] = useState([]);
-  const [doneTaskList,setDoneTaskList] = useState([])
- // const [isDone, setIsDone] = useState({});
+  const [doneTaskList, setDoneTaskList] = useState([]);
 
-  // Fonction pour gérer le changement de l'entrée(utilsation direct de la destructuration)
   function handleInputChange({ target }) {
     setTask(target.value);
   }
@@ -16,7 +14,9 @@ export default function Todolist() {
   function handleAddTask(event) {
     event.preventDefault();
     if (task.trim()) {
-      setTasks([...tasks, { id: Date.now(), text: task, done: false }]);
+      const newTask = { id: Date.now(), text: task, done: false };
+      setTasks([...tasks, newTask]);
+      console.log("Added Task:", newTask); // Log the new task
       setTask("");
     } else {
       alert("Please enter a task!");
@@ -24,18 +24,14 @@ export default function Todolist() {
   }
 
   function handleDone(taskId) {
-    console.log(taskId)
-    console.log(task.id)
-    setTasks(tasks.map(task => 
-      task.id === taskId ? { ...task, done: !task.done } : task
-    ));
-    if (taskId === task.id){
-      alert('la tache est termne')
-    }else(alert('nothing hpnd'))
+    console.log("Task ID to be toggled:", taskId); // Log the task ID to be toggled
+    setTasks(tasks.map(task => {
+      console.log("Current Task:", task); // Log the current task
+      return task.id === taskId ? { ...task, done: !task.done } : task;
+    }));
   }
 
-  // Fonction pour supprimer une tâche
-  async function handleDelete(taskId) {
+  function handleDelete(taskId) {
     setTasks(tasks.filter(task => task.id !== taskId));
   }
 
