@@ -1,41 +1,45 @@
-
-
 import { useState } from "react";
-
+import supabase from "./supabaseClient";
 export default function Todolist() {
   const [task, setTask] = useState("");
   const [tasks, setTasks] = useState([]);
-  const [doneTaskList, setDoneTaskList] = useState([]);
+  // const [doneTaskList, setDoneTaskList] = useState([]);
 
   function handleInputChange({ target }) {
     setTask(target.value);
   }
 
-  function handleAddTask(event) {
+async function handleAddTask(event) {
     event.preventDefault();
     if (task.trim()) {
       const newTask = { id: Date.now(), text: task, done: false };
       setTasks([...tasks, newTask]);
-      console.log("Added Task:", newTask); 
+      console.log("Added Task:", newTask);
       setTask("");
+      const { data } = await supabase
+             .from("toDoList")
+             .insert([{ task }])
+             .select('*');
+             console.log('this is',data)
     } else {
       alert("Please enter a task!");
     }
+  
   }
 
   function handleDone(taskId) {
-    console.log("Task ID to be toggled:", taskId); 
-    setTasks(tasks.map(task => {
-      console.log("Current Task:", task);
-      return task.id === taskId ? { ...task, done: !task.done } : task;
-      
-    }));
-    console.log(taskId,'and',task.id)
- 
+    console.log("Task ID to be toggled:", taskId);
+    setTasks(
+      tasks.map((task) => {
+        console.log("Current Task:", task);
+        return task.id === taskId ? { ...task, done: !task.done } : task;
+      })
+    );
+    console.log(taskId, "and", task.id);
   }
 
   function handleDelete(taskId) {
-    setTasks(tasks.filter(task => task.id !== taskId));
+    setTasks(tasks.filter((task) => task.id !== taskId));
   }
 
   return (
@@ -70,22 +74,22 @@ export default function Todolist() {
         </form>
       </div>
       <ul className="flex flex-col p-2 pb-1 h-72 overflow-auto">
-        {tasks.map(task => (
+        {tasks.map((task) => (
           <li
             key={task.id}
             className="flex items-center justify-between mb-3 mt-3 p-3 h-12 rounded-lg border m-10 border-slate-300 bg-slate-600 hover:bg-slate-700 shadow-xl "
-             
           >
-            <span className={`text-base text-slate-200 overflow-x-auto pl-8 font-medium  ${
-              task.done ? 'line-through' : ''
-            }`}>
+            <span
+              className={`text-base text-slate-200 overflow-x-auto pl-8 font-medium  ${
+                task.done ? "line-through" : ""
+              }`}
+            >
               {task.text}
             </span>
             <div className="flex gap-2">
               <button
                 onClick={() => handleDone(task.id)}
                 className="px-3 py-2 rounded-lg bg-green-400 hover:bg-green-700 text-white font-medium"
-             
               >
                 {task.done ? "Undone" : "Done"}
               </button>
@@ -102,11 +106,6 @@ export default function Todolist() {
     </div>
   );
 }
-
-
-
-
-
 
 // import { useState } from "react";
 
@@ -126,8 +125,7 @@ export default function Todolist() {
 //     setTask(value);
 //     console.log(task)
 //   }
-// //  
-
+// //
 
 // // function handleButtonClick ({target}){
 // //     const {value} = target;
@@ -151,7 +149,6 @@ export default function Todolist() {
 // //   }
 //   // insère une nouvelle tâche dans la table “toDoList” de Supabase si task n’est
 //   //  pas vide. Elle met également à jour l’état tasks avec la nouvelle tâche.
-
 
 //   async function handleDelete(taskId) {
 //     // setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
@@ -246,8 +243,8 @@ export default function Todolist() {
 //   );
 // }
 
-// //d'abord le faire fonctionner 
+// //d'abord le faire fonctionner
 // //ensuite fixer les erreurs et bugs
-// //l'ameliorer 
+// //l'ameliorer
 // //faire fonctionner supabase dessus
 // //le transferer vers le prod
