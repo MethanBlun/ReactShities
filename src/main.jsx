@@ -6,7 +6,7 @@ import Root from './pages/Root';
 import About from './components/About';
 import Contact from './components/Contact';
 import ErrorPage from './pages/ErrorPage';
-import Home from './components/Home';
+import Home from './components/home';
 const router = createBrowserRouter([
   {
     path: '/',
