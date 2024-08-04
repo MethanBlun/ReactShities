@@ -1,9 +1,18 @@
 
-
+import Truc from "./trucs";
 
 
 function App() {
-  return <p>hello world</p>;
+  return (<>
+  
+    <Truc 
+    
+    title={'lorem'}
+    
+    />
+  
+  </>)
+
 }
 
 export default App;
