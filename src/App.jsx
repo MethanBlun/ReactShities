@@ -1,28 +1,16 @@
 import { useEffect, useState } from "react";
 
-
-
-
-
 export default function App() {
-
-
   const [elapsedTime, setElapsedTIme] = useState(0);
 
-    useEffect(()=>{
+  useEffect(() => {
+   const intervalid = setInterval(() => {
+      setElapsedTIme((prev) => prev + 1);
+    }, 1000);
 
-      setInterval (()=>{
-              setElapsedTIme( prev => prev + 1 )
-      },1000)
+    return ()=>clearInterval(intervalid);
+  }, []);
 
-
-
-    })
-
-
-
-
-  
   return (
     <>
       <button onClick={null}>increase ? {elapsedTime}</button>
