@@ -1,17 +1,38 @@
-const produit = {
-  id: 1,
-  nomProduit: "Ordinateur Portable",
-  prix: 1200,
-};
+import { useEffect, useState } from "react";
 
-// Utilise la destructuration pour extraire les propriétés et les renommer
-const { id: productId, nomProduit: productName, prix: productPrice } = produit;
 
-// Affiche les valeurs des variables
-console.log(productId); // doit afficher 1
-console.log(productName); // doit afficher 'Ordinateur Portable'
-console.log(productPrice); // doit afficher 1200
+
+
 
 export default function App() {
-  return <></>;
+
+
+  const [elapsedTime, setElapsedTIme] = useState(0);
+
+    useEffect(()=>{
+
+      setInterval (()=>{
+              setElapsedTIme( prev => prev + 1 )
+      },1000)
+
+
+
+    })
+
+
+
+
+  
+  return (
+    <>
+      <button onClick={null}>increase ? {elapsedTime}</button>
+      <p>
+        {" "}
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit non
+        animi ipsa saepe rem architecto recusandae voluptatum. Odit, tenetur
+        autem voluptatem est consequuntur vel architecto repellendus quidem,
+        velit libero iusto?
+      </p>
+    </>
+  );
 }
