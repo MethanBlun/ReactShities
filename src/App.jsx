@@ -2,18 +2,22 @@ import { useEffect, useState } from "react";
 
 export default function App() {
   const [elapsedTime, setElapsedTIme] = useState(0);
+  function handleAlert() {
+    return alert("keydown was clicked");
+  }
 
   useEffect(() => {
     const intervalid = setInterval(() => {
       setElapsedTIme((prev) => prev + 1);
     }, 1000);
 
-    document.addEventListener('keydown',()=>{
-      alert('keydown was clicked')
-    })
+    document.addEventListener("keydown", handleAlert);
 
-    return () => clearInterval(intervalid);
-  }, []);
+    return () => {
+      clearInterval(intervalid);
+      document.removeEventListener("keydown", handleAlert);
+    };
+  });
 
   return (
     <>
