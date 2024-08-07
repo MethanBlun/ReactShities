@@ -4,16 +4,20 @@ export default function App() {
   const [elapsedTime, setElapsedTIme] = useState(0);
 
   useEffect(() => {
-   const intervalid = setInterval(() => {
+    const intervalid = setInterval(() => {
       setElapsedTIme((prev) => prev + 1);
     }, 1000);
 
-    return ()=>clearInterval(intervalid);
+    document.addEventListener('keydown',()=>{
+      alert('keydown was clicked')
+    })
+
+    return () => clearInterval(intervalid);
   }, []);
 
   return (
     <>
-      <button onClick={null}>increase ? {elapsedTime}</button>
+      <button onClick={null}>increase {elapsedTime}</button>
       <p>
         {" "}
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit non
